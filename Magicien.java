@@ -1,8 +1,8 @@
 public class Magicien extends Sorcier implements SuperPouvoir{
-	// inutile car le constructeur de Sorcier s applique ?
-	/*public Magicien(String nom){
+
+	public Magicien(String nom){
 		super(nom);
-	}*/
+	}
 
 	public double getPouvoir(){
 		return extra*this.pouvoir;

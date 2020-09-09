@@ -6,8 +6,11 @@ public class Main{
 		int lenSorcier = 5;
 		int totalPersonnage = lenMonstre + lenSorcier;
 
+		//On va tirer aléatoirement le nombre de magicien parmis les sorciers
+		int lenMagicien = (int)Math.floor(Math.random()*lenSorcier);
+
 		Personnage[] tableau = new Personnage[totalPersonnage];
-		preparation(tableau, nMonstre, nSorcier);
+		preparation(tableau, nMonstre, nSorcier, lenMagicien);
 		etat(tableau);
 
 		for(int i=0; i<5; i++){//5 est le nombre de Round
@@ -43,11 +46,16 @@ public class Main{
 		}
 	}
 
-	public static void preparation(Personnage[] tableau, String[] nMonstre, String[] nSorcier){
+	public static void preparation(Personnage[] tableau, String[] nMonstre, String[] nSorcier, int lenMagicien){
 		int i = 0;
 		for (String s : nSorcier){
-			tableau[i] = new Sorcier(s);
-			tableau[i].addVie((int)Math.floor(Math.random()*100));
+			if (i < lenMagicien) {
+				tableau[i] = new Magicien(s);
+			}
+			else {
+				tableau[i] = new Sorcier(s);
+			}
+			tableau[i].addVie((int) Math.floor(Math.random() * 100));
 			i = i+1;
 		}
 			

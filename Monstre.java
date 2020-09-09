@@ -1,4 +1,8 @@
 public class Monstre extends Personnage{
+	public Monstre(String nom){
+		super(nom);
+	}
+
 	public void attaque(Personnage p){
 		if (!this.mort()){	 
 			int retour = p.subitFrappe((int)-Math.floor(this.getVie()/2));

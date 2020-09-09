@@ -1,26 +1,28 @@
 public class Main{
-	private static int combattantS = 5;
-	private static int combattantM = 5;
-	private static int combattantT = combattantS + combattantM;
-
 	public static void main(String[] args){
-		Personnage[] tableau = new Personnage[combattantT];
-		preparation(tableau);
+		String[] nMonstre = {"Shrek", "Frankeinstein", "Dracula", "KinkKong", "Yeti"};
+		String[] nSorcier = {"Merlin", "MagicienDOZ","Gandalf","Gargamel","Albus"};
+		int lenMonstre = 5;
+		int lenSorcier = 5;
+		int totalPersonnage = lenMonstre + lenSorcier;
+
+		Personnage[] tableau = new Personnage[totalPersonnage];
+		preparation(tableau, nMonstre, nSorcier);
 		etat(tableau);
 
 		for(int i=0; i<5; i++){//5 est le nombre de Round
-			int attaque = (int)(Math.random()*combattantT);
-			int def = (int)(Math.random()*combattantT);
+			int attaque = (int)(Math.random()*totalPersonnage);
+			int def = (int)(Math.random()*totalPersonnage);
 			
 			if (attaque == def){
 	
 				def = (def+1)%10;
 			}
-
 			tableau[attaque].attaque(tableau[def]);
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
 			etat(tableau);
 		}
+		/*
 		Magicien M0 = new Magicien();
 		Sorcier S0 = new Sorcier();
 		M0.addVie(100);
@@ -30,6 +32,7 @@ public class Main{
 		System.out.println(M0.getVie());
 		System.out.println(S0.getVie());
 		System.out.println(S0.getPouvoir());
+		*/
 	}
 	
 		
@@ -40,15 +43,18 @@ public class Main{
 		}
 	}
 
-	public static void preparation(Personnage[] tableau){
-		for (int i=0; i<combattantS;i++){
-			tableau[i] = new Sorcier();
+	public static void preparation(Personnage[] tableau, String[] nMonstre, String[] nSorcier){
+		int i = 0;
+		for (String s : nSorcier){
+			tableau[i] = new Sorcier(s);
 			tableau[i].addVie((int)Math.floor(Math.random()*100));
+			i = i+1;
 		}
 			
-		for (int i=combattantM; i<combattantT;i++){
-			tableau[i] = new Monstre();
+		for (String m : nMonstre){
+			tableau[i] = new Monstre(m);
 			tableau[i].addVie((int)Math.floor(Math.random()*100));
+			i = i+1;
 		}
 		
 		

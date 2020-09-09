@@ -8,13 +8,14 @@ public class NainJardin implements Victime{
 	}
 
 	public int subitFrappe(int coup){
-		if (solidite < coup){
+		//J ai pris une convention bizarre pour coup qui est négatif
+		if (solidite < -coup){
 			int copie = solidite;
 			solidite = 0;
 			return -copie;
 		}
 		else{
-			return - coup;
+			return coup;
 		}
 	}
 

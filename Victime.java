@@ -1,5 +1,5 @@
 public interface Victime{
-	public int subitFrappe(int coup);
-	public int subitCharme(int coup);
+	int subitFrappe(int coup);
+	int subitCharme(int coup);
 
 }

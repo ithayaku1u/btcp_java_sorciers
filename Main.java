@@ -1,6 +1,6 @@
 public class Main{
 	public static void main(String[] args){
-		String[] nMonstre = {"Shrek", "Frankeinstein", "Dracula", "KinkKong", "Yeti"};
+		String[] nMonstre = {"Shrek", "Frankeinstein", "Dracula", "KingKong", "Yeti"};
 		String[] nSorcier = {"Merlin", "MagicienDOZ","Gandalf","Gargamel","Albus"};
 		int lenMonstre = 5;
 		int lenSorcier = 5;
@@ -26,6 +26,7 @@ public class Main{
 			Victime v_def = tableau[def];
 
 			if (v_attaq instanceof SuperPouvoir && v_def instanceof SuperPouvoir){
+				System.out.println("--->Exces de magie -1 pour ceux sans pouvoir--->");
 				//exces de magie tout les personnage basique perdent 1 points de VIE
 				for(Victime v : tableau){
 					if (v instanceof Sorcier || v instanceof Monstre){
@@ -34,13 +35,24 @@ public class Main{
 						}
 					}
 				}
+				etat(tableau);
 			}
-			if (v_attaq instanceof Personnage){
+			if (v_attaq instanceof Personnage && v_def instanceof Personnage){
+				System.out.println("---> " +((Personnage) v_attaq).getNom() + " attaque ---> " + ((Personnage) v_def).getNom() );
 				((Personnage) v_attaq).attaque(v_def);
+				System.out.println(((Personnage) v_attaq).getNom() + " pdv :" + ((Personnage) v_attaq).getVie());
+				System.out.println(((Personnage) v_def).getNom() + " pdv : " + ((Personnage) v_def).getVie());
+			}
+			else if (v_attaq instanceof Personnage){
+				System.out.println("---> " +((Personnage) v_attaq).getNom() + " attaque ---> " + v_def);
+				((Personnage) v_attaq).attaque(v_def);
+				System.out.println(((Personnage) v_attaq).getNom() + " pdv : " + ((Personnage) v_attaq).getVie());
 			}
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
-			etat(tableau);
+
 		}
+		System.out.println("FIN DE PARTIE : ");
+		etat(tableau);
 		/*
 		Magicien M0 = new Magicien();
 		Sorcier S0 = new Sorcier();

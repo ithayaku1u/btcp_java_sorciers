@@ -18,6 +18,7 @@ public class Sorcier extends Personnage{
 	
 	public void attaque(Victime p){
 		if(!this.mort()){
+			//System.out.println(pouvoir);
 			int retour = p.subitCharme(-(int)Math.floor(this.getVie()*this.pouvoir));
 			this.addVie(retour);
 		}

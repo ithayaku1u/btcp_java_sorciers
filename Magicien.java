@@ -15,6 +15,11 @@ public class Magicien extends Sorcier implements SuperPouvoir{
 	public int subitCharme(int coup){
 		return (int)(coup*this.sort());
 	}
-	
+
+	public String toString(){
+		String txt = super.toString() + " (Magicien)";
+		return txt;
+
+	}
 
 }

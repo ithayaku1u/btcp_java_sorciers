@@ -4,13 +4,15 @@ public class Main{
 		String[] nSorcier = {"Merlin", "MagicienDOZ","Gandalf","Gargamel","Albus"};
 		int lenMonstre = 5;
 		int lenSorcier = 5;
-		int totalPersonnage = lenMonstre + lenSorcier;
+		int nbGnome = 1;
+		int nbNain = 1;
+		int totalPersonnage = lenMonstre + lenSorcier + nbGnome + nbNain;
 
 		//On va tirer aléatoirement le nombre de magicien parmis les sorciers
 		int lenMagicien = (int)Math.floor(Math.random()*lenSorcier);
 
-		Personnage[] tableau = new Personnage[totalPersonnage];
-		preparation(tableau, nMonstre, nSorcier, lenMagicien);
+		Victime[] tableau = new Victime[totalPersonnage];
+		preparation(tableau, nMonstre, nSorcier, lenMagicien, nbGnome, nbNain);
 		etat(tableau);
 
 		for(int i=0; i<5; i++){//5 est le nombre de Round
@@ -18,10 +20,24 @@ public class Main{
 			int def = (int)(Math.random()*totalPersonnage);
 			
 			if (attaque == def){
-	
 				def = (def+1)%10;
 			}
-			tableau[attaque].attaque(tableau[def]);
+			Victime v_attaq = tableau[attaque];
+			Victime v_def = tableau[def];
+
+			if (v_attaq instanceof SuperPouvoir && v_def instanceof SuperPouvoir){
+				//exces de magie tout les personnage basique perdent 1 points de VIE
+				for(Victime v : tableau){
+					if (v instanceof Sorcier || v instanceof Monstre){
+						if (!(v instanceof Magicien)){
+							((Personnage) v).addVie(-1);
+						}
+					}
+				}
+			}
+			if (v_attaq instanceof Personnage){
+				((Personnage) v_attaq).attaque(v_def);
+			}
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
 			etat(tableau);
 		}
@@ -40,13 +56,13 @@ public class Main{
 	
 		
 
-	public static void etat(Personnage[] tableau){
-		for(Personnage p : tableau){
+	public static void etat(Victime[] tableau){
+		for(Victime p : tableau){
 			System.out.println(p);
 		}
 	}
 
-	public static void preparation(Personnage[] tableau, String[] nMonstre, String[] nSorcier, int lenMagicien){
+	public static void preparation(Victime[] tableau, String[] nMonstre, String[] nSorcier, int lenMagicien, int nbGnome, int nbNain){
 		int i = 0;
 		for (String s : nSorcier){
 			if (i < lenMagicien) {
@@ -55,14 +71,21 @@ public class Main{
 			else {
 				tableau[i] = new Sorcier(s);
 			}
-			tableau[i].addVie((int) Math.floor(Math.random() * 100));
+			((Personnage)tableau[i]).addVie((int) Math.floor(Math.random() * 100));
 			i = i+1;
 		}
 			
 		for (String m : nMonstre){
 			tableau[i] = new Monstre(m);
-			tableau[i].addVie((int)Math.floor(Math.random()*100));
+			((Personnage)tableau[i]).addVie((int)Math.floor(Math.random()*100));
 			i = i+1;
+		}
+
+		for(int j = i; j < i + nbNain; j++) {
+			tableau[j] = new NainJardin((int)Math.floor(Math.random()*100));
+		}
+		for(int j = i + nbNain; j< i+nbNain+nbGnome; j++){
+			tableau[j] = new GnomeJardin((int)Math.floor(Math.random()*100));
 		}
 		
 		

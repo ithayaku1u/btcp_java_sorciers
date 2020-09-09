@@ -3,7 +3,7 @@ public class Monstre extends Personnage{
 		super(nom);
 	}
 
-	public void attaque(Personnage p){
+	public void attaque(Victime p){
 		if (!this.mort()){	 
 			int retour = p.subitFrappe((int)-Math.floor(this.getVie()/2));
 			this.addVie(retour);

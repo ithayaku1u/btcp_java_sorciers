@@ -1,4 +1,8 @@
 public class GnomeJardin extends NainJardin  implements SuperPouvoir{
+	public GnomeJardin(int solidite){
+		super(solidite);
+	}
+
 	public int subitCharme(int coup){
 		if (this.sort()> -coup){
 			return coup;

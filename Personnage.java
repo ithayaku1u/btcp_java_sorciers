@@ -36,7 +36,7 @@ public abstract class Personnage implements Victime{
 		this.point = this.point + n;
 	}
 
-	public abstract void attaque(Personnage p);
+	public abstract void attaque(Victime p);
 	//ce qui est dessous va faire partir de l'interface
 	//public abstract int subitFrappe(int coup);
 	//public abstract int subitCharme(int coup);

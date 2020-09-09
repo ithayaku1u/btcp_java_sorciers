@@ -3,6 +3,10 @@ public class GnomeJardin extends NainJardin  implements SuperPouvoir{
 		super(solidite);
 	}
 
+	public String toString(){
+		return "Gnome de Jardin, Solidite :" + this.solidite;
+	}
+
 	public int subitCharme(int coup){
 		if (this.sort()> -coup){
 			return coup;

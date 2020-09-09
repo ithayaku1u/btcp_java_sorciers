@@ -3,6 +3,11 @@ public class NainJardin implements Victime{
 
 	public NainJardin(){
 	}
+
+	public String toString(){
+		return "Nain de Jardin, Solidite :" + this.solidite;
+	}
+
 	public NainJardin(int sol){
 		this.solidite = sol;
 	}
